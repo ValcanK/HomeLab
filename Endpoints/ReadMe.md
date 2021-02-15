@@ -4,3 +4,7 @@ This script is designed to help you quickly get started with shipping Windows an
 Example of what you'll see:
 
 ![Endpoint Setup](/Endpoints/EndPoint-Config.png "Example")
+
+Logs flowing to Kibana:
+
+![Logs](/Endpoints/Logs-2.png "Logs")
