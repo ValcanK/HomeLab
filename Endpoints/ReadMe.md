@@ -1,5 +1,5 @@
 # Info:
-This script is designed to help you quickly get started with shipping Windows and Sysmon event logs to HELK.
+This script is designed to help you quickly start sending Windows and Sysmon event logs to HELK.
 
 Usage:
 - Run PowerShell as admin
