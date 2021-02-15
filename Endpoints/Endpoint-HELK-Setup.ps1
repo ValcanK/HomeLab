@@ -1,9 +1,13 @@
 function Config-Change {
     <#
+    .Author
+    
+        @Valcan_K
+        
     .SYNOPSIS
         
-        This script was made to help automate the setup of a Windows endpoint when using Cyb3rWard0g's HELK.
-    
+        This script was made to help automate the setup of a Windows endpoint when using Cyb3rWard0g's HELK (https://github.com/Cyb3rWard0g/HELK).
+            https://twitter.com/cyb3rward0g
     .PARAMETER HELKIP
         
         The HELKIP paramter will configure the winlogbeat.yml file with the IP address of your HELK system.
@@ -30,7 +34,7 @@ function Config-Change {
     Param(
         [Parameter(Mandatory = $True, Position = 0)]
         [string]$HELKIP = $HELKIP
-
+        # Prompting for HELK IP address
     )
     Try {
         winlog-Install
@@ -42,20 +46,26 @@ function Config-Change {
 function Download-Files {
     hostname
     Write-Host "Starting Winlog Download"
+    # Downloading winlogbeat
     Invoke-WebRequest -URI https://artifacts.elastic.co/downloads/beats/winlogbeat/winlogbeat-7.11.0-windows-x86_64.zip -OutFile $env:USERPROFILE\Downloads\winlogbeat.zip
     Write-Host "Extracting Winlog files to 'C:\Program Files\'"
+    # Extracting contents of winlogbeat
     Expand-Archive -LiteralPath "$env:USERPROFILE\Downloads\winlogbeat.zip" -DestinationPath "C:\Program Files\"
+    # Changing the Directory Name
     Rename-Item "C:\Program Files\winlogbeat-7.11.0-windows-x86_64" "C:\Program Files\winlogbeat"
     Write-Host "Downloading a version of Cyb3rWard0g's winlogbeat.yml config from my repo."
     # If you want to use a different winlogbeat.yml file, just change url below.
     Invoke-WebRequest -URI https://raw.githubusercontent.com/ValcanK/HomeLab/main/Endpoints/winlogbeat.yml -OutFile "C:\Program Files\winlogbeat\winlogbeat.yml"
     Write-Host "Starting Sysmon download"
+    # Downloading sysmon
     Invoke-WebRequest -URI https://download.sysinternals.com/files/Sysmon.zip -OutFile $env:USERPROFILE\Downloads\Sysmon.zip
     Write-Host "Extracting Sysmon files to 'C:\Program Files\Sysmon'"
+    # Extracting contents of sysmon to Program Files
     Expand-Archive -LiteralPath "$env:USERPROFILE\Downloads\Sysmon.zip" -DestinationPath "C:\Program Files\Sysmon"
     Sysmon-Function
 }
 function Sysmon-Function {
+    # Setting sysmon up
     cd "C:\Program Files\Sysmon"
     Write-Host "Setting up Sysmon"
     .\sysmon.exe -i -accepteula -h md5,sha256,imphash -l -n
@@ -67,6 +77,7 @@ function Sysmon-Function {
     Config-Change
 }
 function winlog-Install {
+    # Setting winlogbeat up
     cd "C:\Program Files\winlogbeat\"
     .\install-service-winlogbeat.ps1
     (Get-Content -Path "C:\Program Files\winlogbeat\winlogbeat.yml" -Raw) -replace '<HELK-IP>',$HELKIP | Set-Content -Path "C:\Program Files\winlogbeat\winlogbeat.yml"
