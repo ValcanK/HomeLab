@@ -2,7 +2,7 @@ function Config-Change {
     <#
     .Author
     
-        @Valcan_K
+        https://twitter.com/Valcan_K
         
     .SYNOPSIS
         
