@@ -2,4 +2,4 @@
 This script is designed to help you quickly get started with shipping Windows and Sysmon event logs to HELK.
 
 Example of what you'll see
-![Endpoint Setup](//main/Endpoints/EndPoint-Config.png "Example")
+![Endpoint Setup](/main/Endpoints/EndPoint-Config.png "Example")
