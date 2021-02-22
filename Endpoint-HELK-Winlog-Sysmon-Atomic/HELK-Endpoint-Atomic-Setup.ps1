@@ -4,6 +4,8 @@ function Config-Change {
         Author: https://twitter.com/Valcan_K
         This script was made to help automate the setup of a Windows endpoint when using Cyb3rWard0g's HELK (https://github.com/Cyb3rWard0g/HELK).
             https://twitter.com/cyb3rward0g
+        This script uses SwiftOnSecurity's Sysmon Config (https://github.com/SwiftOnSecurity/sysmon-config/blob/master/sysmonconfig-export.xml)
+            https://twitter.com/SwiftOnSecurity
         This script also installs "Invoke-AtomicRedTeam" and the Atomic tests from Red Canary.
             Invoke-atomicredteam: https://github.com/redcanaryco/invoke-atomicredteam
             Atomic Red Team Tests: https://github.com/redcanaryco/atomic-red-team
